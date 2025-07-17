@@ -1,7 +1,6 @@
 package com.example.Orderservice.clients;
 
 import com.example.Orderservice.dto.ProductDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -18,9 +17,11 @@ public class ProductServiceClient {
 
     public ProductDTO getProductById(Long productId) {
         RestTemplate restTemplate = restTemplateBuilder.build();
+        //not the best way > Service Discovery > Netflix Eureka
         String url = "http://localhost:7777/api/products/" + productId;
 
         ResponseEntity<ProductDTO> response = restTemplate.getForEntity(url, ProductDTO.class);
         return response.getBody();
     }
+
 }

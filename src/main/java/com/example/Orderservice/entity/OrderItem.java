@@ -1,15 +1,19 @@
 package com.example.Orderservice.entity;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.databind.ser.Serializers;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.*;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "orderItems")
+@Entity
+@Table(name="orderItems")
 public class OrderItem extends BaseEntity{
 
     private Long productId;
@@ -17,8 +21,7 @@ public class OrderItem extends BaseEntity{
     private double pricePerUnit;
     private double totalPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-
 }
